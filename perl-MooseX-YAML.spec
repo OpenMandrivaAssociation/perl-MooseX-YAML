@@ -1,23 +1,23 @@
 %define upstream_name    MooseX-YAML
 %define upstream_version 0.04
 
-Name:       perl-%{upstream_name}
-Version:    %perl_convert_version %{upstream_version}
-Release:    %mkrel 2
+Name:		perl-%{upstream_name}
+Version:	%perl_convert_version %{upstream_version}
+Release:	3
 
-Summary:    DWIM loading of Moose objects from YAML
-License:    GPL+ or Artistic
-Group:      Development/Perl
-Url:        http://search.cpan.org/dist/%{upstream_name}
-Source0:    http://www.cpan.org/modules/by-module/MooseX/%{upstream_name}-%{upstream_version}.tar.gz
+Summary:	DWIM loading of Moose objects from YAML
+License:	GPL+ or Artistic
+Group:		Development/Perl
+Url:		http://search.cpan.org/dist/%{upstream_name}
+Source0:	http://www.cpan.org/modules/by-module/MooseX/%{upstream_name}-%{upstream_version}.tar.gz
 
-BuildRequires: perl(MooseX::Blessed::Reconstruct)
-BuildRequires: perl(Sub::Exporter)
-BuildRequires: perl(Test::use::ok)
-BuildRequires: perl(YAML)
-BuildRequires: perl(namespace::clean)
-BuildArch: noarch
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}
+BuildRequires:	perl-devel
+BuildRequires:	perl(MooseX::Blessed::Reconstruct)
+BuildRequires:	perl(Sub::Exporter)
+BuildRequires:	perl(Test::use::ok)
+BuildRequires:	perl(YAML)
+BuildRequires:	perl(namespace::clean)
+BuildArch:	noarch
 
 %description
 This module provides DWIM loading of the Moose manpage based objects from
@@ -34,24 +34,29 @@ loaded YAML documented are treated specially.
 %setup -q -n %{upstream_name}-%{upstream_version}
 
 %build
-%{__perl} Makefile.PL INSTALLDIRS=vendor
-
+perl Makefile.PL INSTALLDIRS=vendor
 %make
 
 %check
 %make test
 
 %install
-rm -rf %buildroot
 %makeinstall_std
 
-%clean
-rm -rf %buildroot
-
 %files
-%defattr(-,root,root)
 %doc Changes META.yml
 %{_mandir}/man3/*
-%perl_vendorlib/*
+%{perl_vendorlib}/*
+
+%changelog
+* Mon Apr 18 2011 Funda Wang <fwang@mandriva.org> 0.40.0-2mdv2011.0
++ Revision: 655604
+- rebuild for updated spec-helper
+
+* Wed Jul 28 2010 Shlomi Fish <shlomif@mandriva.org> 0.40.0-1mdv2011.0
++ Revision: 562772
+- import perl-MooseX-YAML
 
 
+* Wed Jul 14 2010 cpan2dist 0.04-1mdv
+- initial mdv release, generated with cpan2dist
