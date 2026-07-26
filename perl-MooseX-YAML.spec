@@ -1,15 +1,13 @@
 %define upstream_name    MooseX-YAML
-%define upstream_version 0.05
-
 Name:		perl-%{upstream_name}
-Version:	%{upstream_version}
-Release:	1
+Version:	0.05
+Release:	2
 
 Summary:	DWIM loading of Moose objects from YAML
 License:	GPL+ or Artistic
 Group:		Development/Perl
 Url:		https://metacpan.org/dist/MooseX-YAML
-Source0:	https://cpan.metacpan.org/authors/id/T/TI/TINITA/MooseX-YAML-%{upstream_version}.tar.gz
+Source0:	https://cpan.metacpan.org/authors/id/T/TI/TINITA/MooseX-YAML-%{version}.tar.gz
 
 BuildRequires:	make
 BuildRequires:	perl-devel
@@ -32,7 +30,7 @@ This is similar to the YAML::Active manpage in that certain nodes in the
 loaded YAML documented are treated specially.
 
 %prep
-%setup -q -n %{upstream_name}-%{upstream_version}
+%setup -q -n %{upstream_name}-%{version}
 
 %build
 perl Makefile.PL INSTALLDIRS=vendor
